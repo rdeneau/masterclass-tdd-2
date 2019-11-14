@@ -18,6 +18,9 @@ namespace MarsRoverKata
 
         [Theory]
         [InlineData("N", "W")]
+        [InlineData("W", "S")]
+        [InlineData("S", "E")]
+        [InlineData("E", "N")]
         public void Turn_Left(string startDirection, string endDirection)
         {
             var sut = MarsRover.HeadingTo(startDirection);
