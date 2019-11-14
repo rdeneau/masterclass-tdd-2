@@ -8,11 +8,16 @@ namespace MarsRoverKata
             return new MarsRover(direction);
         }
 
-        public Direction Direction { get; }
+        public Direction Direction { get; private set; }
 
         private MarsRover(Direction direction)
         {
             Direction = direction;
+        }
+
+        public void TurnLeft()
+        {
+            Direction = Direction.West;
         }
     }
 }

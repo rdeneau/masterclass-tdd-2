@@ -13,7 +13,7 @@ namespace MarsRoverKata
         private static readonly Direction North = new Direction("N");
         private static readonly Direction South = new Direction("S");
         private static readonly Direction East  = new Direction("E");
-        private static readonly Direction West  = new Direction("W");
+        public static readonly Direction West  = new Direction("W");
 
         private static readonly Dictionary<string, Direction> AllByLetter =
             new[] {North, South, East, West}.ToDictionary(x => x.Letter);
