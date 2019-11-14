@@ -1,6 +1,8 @@
+using System;
+
 namespace MarsRoverKata
 {
-    public class Coordinate
+    public class Coordinate : IEquatable<Coordinate>
     {
         public int Value { get; private set; }
 
@@ -26,5 +28,22 @@ namespace MarsRoverKata
             Value = Value == Max
                         ? Min
                         : Value + 1;
+
+        public bool Equals(Coordinate other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+            return Value == other.Value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Coordinate) obj);
+        }
+
+        public override int GetHashCode() => Value;
     }
 }

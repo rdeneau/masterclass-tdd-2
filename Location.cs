@@ -27,7 +27,7 @@ namespace MarsRoverKata
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return X == other.X && Y == other.Y;
+            return X.Equals(other.X) && Y.Equals(other.Y);
         }
 
         public override bool Equals(object obj)
