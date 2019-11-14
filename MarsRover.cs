@@ -16,6 +16,8 @@ namespace MarsRoverKata
             private int LocationX { get; set; } = -1;
             private int LocationY { get; set; } = -1;
 
+            private int GridSize { get; set; } = int.MaxValue;
+
             public Builder Facing(string direction)
             {
                 DirectionLetter = direction;
@@ -29,23 +31,33 @@ namespace MarsRoverKata
                 return this;
             }
 
+            public Builder OnGridOfSize(int gridSize)
+            {
+                GridSize = gridSize;
+                return this;
+            }
+
             public static implicit operator MarsRover(Builder builder) =>
                 new MarsRover(
                     Direction.Create(
                         builder.DirectionLetter),
                     Location.Create(
                         builder.LocationX,
-                        builder.LocationY));
+                        builder.LocationY),
+                    Grid.Create(builder.GridSize));
         }
 
         public Direction Direction { get; private set; }
 
         public Location Location { get; }
 
-        private MarsRover(Direction direction, Location location)
+        public Grid Grid { get; }
+
+        private MarsRover(Direction direction, Location location, Grid grid)
         {
             Direction = direction;
             Location  = location;
+            Grid = grid;
         }
 
         public void TurnLeft()     => Direction = Direction.Left;
