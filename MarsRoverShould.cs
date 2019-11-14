@@ -7,6 +7,7 @@ namespace MarsRoverKata
     {
         [Theory]
         [InlineData("N")]
+        [InlineData("S")]
         public void Have_An_Initial_Direction(string directionLetter)
         {
             var direction = Direction.Create(directionLetter);
