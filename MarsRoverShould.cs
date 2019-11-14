@@ -44,6 +44,7 @@ namespace MarsRoverKata
 
         [Theory]
         [InlineData(1, 1)]
+        [InlineData(2, 3)]
         public void Have_An_Initial_Location(int x, int y)
         {
             sut = MarsRover.ThatIs().LocatedAt(x, y);
