@@ -12,8 +12,7 @@ namespace MarsRoverKata
         [InlineData("W")]
         public void Have_An_Initial_Direction(string directionLetter)
         {
-            var direction = Direction.Create(directionLetter);
-            var sut = new MarsRovers(direction);
+            var sut = MarsRover.HeadingTo(directionLetter);
             sut.Direction.Letter.Should().Be(directionLetter);
         }
     }

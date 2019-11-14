@@ -58,7 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Direction.cs" />
-    <Compile Include="MarsRovers.cs" />
+    <Compile Include="MarsRover.cs" />
     <Compile Include="MarsRoverShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
