@@ -2,24 +2,42 @@ namespace MarsRoverKata
 {
     public class MarsRover
     {
-        public static MarsRover HeadingTo(string directionLetter)
-        {
-            var direction = Direction.Create(directionLetter);
-            return new MarsRover(direction);
-        }
+        public static Builder ThatIs() => new Builder();
 
-        public static MarsRover LocatedAt(int x, int y)
+        public class Builder
         {
-            return HeadingTo("N"); //.WithLocation(x, y);
+            private string DirectionLetter { get; set; } = "N";
+
+            private int LocationX { get; set; } = -1;
+            private int LocationY { get; set; } = -1;
+
+            public Builder HeadingTo(string direction)
+            {
+                DirectionLetter = direction;
+                return this;
+            }
+
+            public Builder LocatedAt(int x, int y)
+            {
+                LocationX = x;
+                LocationY = y;
+                return this;
+            }
+
+            public static implicit operator MarsRover(Builder builder) =>
+                new MarsRover(
+                    Direction.Create(builder.DirectionLetter),
+                    new Location(builder.LocationX, builder.LocationY));
         }
 
         public Direction Direction { get; private set; }
 
-        public Location Location { get; } = new Location(1, 1);
+        public Location Location { get; }
 
-        private MarsRover(Direction direction)
+        private MarsRover(Direction direction, Location location)
         {
             Direction = direction;
+            Location  = location;
         }
 
         public void TurnLeft()  => Direction = Direction.Left;
