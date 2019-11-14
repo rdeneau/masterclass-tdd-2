@@ -4,10 +4,20 @@ namespace MarsRoverKata
 {
     public class MarsRoverShould
     {
-        [Fact]
-        public void Have_An_Initial_Direction()
+        [Theory]
+        [InlineData("N")]
+        public void Have_An_Initial_Direction(string directionLetter)
         {
-            var sut = new MarsRovers();
+            var direction = Direction.Create(directionLetter);
+            var sut = new MarsRovers(direction);
+        }
+    }
+
+    public class Direction
+    {
+        public static Direction Create(string letter)
+        {
+            return null;
         }
     }
 }
