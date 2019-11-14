@@ -14,7 +14,7 @@ namespace MarsRoverKata
         [InlineData("W")]
         public void Have_An_Initial_Direction(string directionLetter)
         {
-            sut = MarsRover.ThatIs().HeadingTo(directionLetter);
+            sut = MarsRover.ThatIs().Facing(directionLetter);
             sut.Direction.Letter.Should().Be(directionLetter);
         }
 
@@ -25,7 +25,7 @@ namespace MarsRoverKata
         [InlineData("E", "N")]
         public void Turn_Left(string startDirection, string endDirection)
         {
-            sut = MarsRover.ThatIs().HeadingTo(startDirection);
+            sut = MarsRover.ThatIs().Facing(startDirection);
             sut.TurnLeft();
             sut.Direction.Letter.Should().Be(endDirection);
         }
@@ -37,7 +37,7 @@ namespace MarsRoverKata
         [InlineData("N", "E")]
         public void Turn_Right(string startDirection, string endDirection)
         {
-            sut = MarsRover.ThatIs().HeadingTo(startDirection);
+            sut = MarsRover.ThatIs().Facing(startDirection);
             sut.TurnRight();
             sut.Direction.Letter.Should().Be(endDirection);
         }
@@ -48,8 +48,23 @@ namespace MarsRoverKata
         public void Have_An_Initial_Location(int x, int y)
         {
             sut = MarsRover.ThatIs().LocatedAt(x, y);
-            sut.Location.X.Should().Be(x);
-            sut.Location.Y.Should().Be(y);
+            sut.Location.Should().Be(Location.Create(x, y));
+        }
+
+        [Theory]
+        [InlineData("N", 1, 0)]
+        [InlineData("S", 1, 2)]
+        [InlineData("W", 0, 1)]
+        [InlineData("E", 2, 1)]
+        public void Move_Forward_One_Time_To_Its_Direction(string direction, int endX, int endY)
+        {
+            sut = MarsRover.ThatIs()
+                           .Facing(direction)
+                           .LocatedAt(1, 1);
+
+            sut.MoveForward();
+
+            sut.Location.Should().Be(Location.Create(endX, endY));
         }
     }
 }

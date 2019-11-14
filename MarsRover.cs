@@ -1,5 +1,10 @@
 namespace MarsRoverKata
 {
+    /// <summary>
+    /// Direction of coordinates:
+    /// • X: West  -> East
+    /// • Y: North -> South
+    /// </summary>
     public class MarsRover
     {
         public static Builder ThatIs() => new Builder();
@@ -11,7 +16,7 @@ namespace MarsRoverKata
             private int LocationX { get; set; } = -1;
             private int LocationY { get; set; } = -1;
 
-            public Builder HeadingTo(string direction)
+            public Builder Facing(string direction)
             {
                 DirectionLetter = direction;
                 return this;
@@ -26,8 +31,11 @@ namespace MarsRoverKata
 
             public static implicit operator MarsRover(Builder builder) =>
                 new MarsRover(
-                    Direction.Create(builder.DirectionLetter),
-                    new Location(builder.LocationX, builder.LocationY));
+                    Direction.Create(
+                        builder.DirectionLetter),
+                    Location.Create(
+                        builder.LocationX,
+                        builder.LocationY));
         }
 
         public Direction Direction { get; private set; }
@@ -40,7 +48,8 @@ namespace MarsRoverKata
             Location  = location;
         }
 
-        public void TurnLeft()  => Direction = Direction.Left;
-        public void TurnRight() => Direction = Direction.Right;
+        public void TurnLeft()    => Direction = Direction.Left;
+        public void TurnRight()   => Direction = Direction.Right;
+        public void MoveForward() => Direction.Move(Location);
     }
 }
