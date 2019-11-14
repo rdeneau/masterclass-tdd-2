@@ -6,7 +6,7 @@ namespace MarsRoverKata
 
         public class Builder
         {
-            private string DirectionLetter { get; set; } = "N";
+            private string DirectionLetter { get; set; } = "?";
 
             private int LocationX { get; set; } = -1;
             private int LocationY { get; set; } = -1;

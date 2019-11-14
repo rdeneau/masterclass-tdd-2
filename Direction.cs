@@ -8,8 +8,9 @@ namespace MarsRoverKata
         public static Direction Create(string letter) =>
             AllByLetter.TryGetValue(letter, out var result)
                 ? result
-                : null;
+                : None;
 
+        private static readonly Direction None  = new Direction("?", "?", "?");
         private static readonly Direction North = new Direction("N", "W", "E");
         private static readonly Direction East  = new Direction("E", "N", "S");
         private static readonly Direction South = new Direction("S", "E", "W");
