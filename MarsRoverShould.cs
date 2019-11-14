@@ -27,5 +27,17 @@ namespace MarsRoverKata
             sut.TurnLeft();
             sut.Direction.Letter.Should().Be(endDirection);
         }
+
+        [Theory]
+        [InlineData("W", "N")]
+        [InlineData("S", "W")]
+        [InlineData("E", "S")]
+        [InlineData("N", "E")]
+        public void Turn_Right(string startDirection, string endDirection)
+        {
+            var sut = MarsRover.HeadingTo(startDirection);
+            sut.TurnRight();
+            sut.Direction.Letter.Should().Be(endDirection);
+        }
     }
 }

@@ -15,9 +15,7 @@ namespace MarsRoverKata
             Direction = direction;
         }
 
-        public void TurnLeft()
-        {
-            Direction = Direction.Left;
-        }
+        public void TurnLeft()  => Direction = Direction.Left;
+        public void TurnRight() => Direction = Direction.Right;
     }
 }
