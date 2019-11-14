@@ -10,19 +10,27 @@ namespace MarsRoverKata
                 ? result
                 : null;
 
-        private static readonly Direction North = new Direction("N");
-        private static readonly Direction South = new Direction("S");
-        private static readonly Direction East  = new Direction("E");
-        public static readonly Direction West  = new Direction("W");
+        private static readonly Direction North = new Direction("N", "W", "E");
+        private static readonly Direction East  = new Direction("E", "N", "S");
+        private static readonly Direction South = new Direction("S", "E", "W");
+        private static readonly Direction West  = new Direction("W", "S", "N");
 
         private static readonly Dictionary<string, Direction> AllByLetter =
             new[] {North, South, East, West}.ToDictionary(x => x.Letter);
 
         public string Letter { get; }
 
-        private Direction(string letter)
+        private readonly string _leftLetter;
+        private readonly string _rightLetter;
+
+        public Direction Left  => Create(_leftLetter);
+        public Direction Right => Create(_rightLetter);
+
+        private Direction(string currentLetter, string leftLetter, string rightLetter)
         {
-            Letter = letter;
+            Letter       = currentLetter;
+            _leftLetter  = leftLetter;
+            _rightLetter = rightLetter;
         }
     }
 }
