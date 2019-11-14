@@ -7,12 +7,19 @@ namespace MarsRoverKata
         public static Location Create(int x, int y) =>
             new Location
             {
+                X = Coordinate.Create(x),
+                Y = Coordinate.Create(y),
+            };
+        
+        public static Location Create(Coordinate x, Coordinate y) =>
+            new Location
+            {
                 X = x,
                 Y = y,
             };
 
-        public int X { get; set; }
-        public int Y { get; set; }
+        public Coordinate X { get; set; }
+        public Coordinate Y { get; set; }
 
         private Location() {}
 
@@ -34,7 +41,7 @@ namespace MarsRoverKata
         {
             unchecked
             {
-                return (X * 397) ^ Y;
+                return (X.GetHashCode() * 397) ^ Y.GetHashCode();
             }
         }
     }

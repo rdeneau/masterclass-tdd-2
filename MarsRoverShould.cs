@@ -83,26 +83,17 @@ namespace MarsRoverKata
             sut.Location.Should().Be(Location.Create(endX, endY));
         }
 
-        [Theory]
-        [InlineData(10)]
-        public void Land_On_A_Planet_With_a_Given_Size(int size)
-        {
-            sut = MarsRover.ThatIs()
-                           .OnGridOfSize(size);
-
-            sut.Grid.Size.Should().Be(size);
-        }
-
         [Theory(Skip = "TODO now!")]
-        [InlineData(2, "N", 0, 0, 0, 2)]
-        public void Wrap_From_Edge_To_The_Other_Moving_Forward(int gridSize, string direction,
-                                                               int startX, int startY,
-                                                               int endX, int endY)
+        [InlineData(10, 6, "N", 0, 0, 0, 5)]
+        public void Wrap_From_Edge_To_The_Other_Moving_Forward(
+            int gridWidth, int gridHeight, string direction,
+            int startX, int startY,
+            int endX, int endY)
         {
             sut = MarsRover.ThatIs()
                            .Facing(direction)
                            .LocatedAt(startX, startY)
-                           .OnGridOfSize(gridSize);
+                           .OnGrid(gridWidth, gridHeight);
             
         }
 

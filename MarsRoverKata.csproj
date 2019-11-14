@@ -57,10 +57,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Coordinate.cs" />
+    <Compile Include="CoordinateShould.cs" />
     <Compile Include="Direction.cs" />
-    <Compile Include="Grid.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="MarsRover.cs" />
+    <Compile Include="MarsRoverBuilder.cs" />
     <Compile Include="MarsRoverShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
