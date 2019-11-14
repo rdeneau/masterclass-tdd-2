@@ -4,6 +4,8 @@ namespace MarsRoverKata
     {
         public static Direction Create(string letter)
         {
+            if (letter == "N")
+                return North;
             return null;
         }
 
