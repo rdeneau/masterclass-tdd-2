@@ -11,11 +11,11 @@ namespace MarsRoverKata
                 ? result
                 : None;
 
-        private static readonly Direction None  = new Direction("?", "?", "?", l => {});
-        private static readonly Direction North = new Direction("N", "W", "E", l => l.Y--);
-        private static readonly Direction East  = new Direction("E", "N", "S", l => l.X++);
-        private static readonly Direction South = new Direction("S", "E", "W", l => l.Y++);
-        private static readonly Direction West  = new Direction("W", "S", "N", l => l.X--);
+        private static readonly Direction None  = new Direction("?", "?", "?", l => {}, l => {});
+        private static readonly Direction North = new Direction("N", "W", "E", l => l.Y--, l => l.Y++);
+        private static readonly Direction East  = new Direction("E", "N", "S", l => l.X++, l => l.X--);
+        private static readonly Direction South = new Direction("S", "E", "W", l => l.Y++, l => l.Y--);
+        private static readonly Direction West  = new Direction("W", "S", "N", l => l.X--, l => l.X++);
 
         private static readonly Dictionary<string, Direction> AllByLetter =
             new[] {North, South, East, West}.ToDictionary(x => x.Letter);
@@ -28,15 +28,18 @@ namespace MarsRoverKata
         public Direction Left  => Create(_leftLetter);
         public Direction Right => Create(_rightLetter);
 
-        public Action<Location> Move { get; }
+        public Action<Location> Forward { get; }
+        public Action<Location> Backward { get; }
 
-        private Direction(string currentLetter, string leftLetter, string rightLetter, Action<Location> move)
+        private Direction(string currentLetter, string leftLetter, string rightLetter,
+                          Action<Location> forward, Action<Location> backward)
         {
             Letter       = currentLetter;
             _leftLetter  = leftLetter;
             _rightLetter = rightLetter;
 
-            Move = move;
+            Forward  = forward;
+            Backward = backward;
         }
     }
 }

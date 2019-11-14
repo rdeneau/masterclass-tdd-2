@@ -66,5 +66,21 @@ namespace MarsRoverKata
 
             sut.Location.Should().Be(Location.Create(endX, endY));
         }
+
+        [Theory]
+        [InlineData("S", 1, 0)]
+        [InlineData("N", 1, 2)]
+        [InlineData("E", 0, 1)]
+        [InlineData("W", 2, 1)]
+        public void Move_Backward_One_Time_To_Its_Direction(string direction, int endX, int endY)
+        {
+            sut = MarsRover.ThatIs()
+                           .Facing(direction)
+                           .LocatedAt(1, 1);
+
+            sut.MoveBackward();
+
+            sut.Location.Should().Be(Location.Create(endX, endY));
+        }
     }
 }

@@ -48,8 +48,9 @@ namespace MarsRoverKata
             Location  = location;
         }
 
-        public void TurnLeft()    => Direction = Direction.Left;
-        public void TurnRight()   => Direction = Direction.Right;
-        public void MoveForward() => Direction.Move(Location);
+        public void TurnLeft()     => Direction = Direction.Left;
+        public void TurnRight()    => Direction = Direction.Right;
+        public void MoveForward()  => Direction.Forward(Location);
+        public void MoveBackward() => Direction.Backward(Location);
     }
 }
