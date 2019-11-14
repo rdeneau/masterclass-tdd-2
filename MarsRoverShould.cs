@@ -11,7 +11,7 @@ namespace MarsRoverKata
         {
             var direction = Direction.Create(directionLetter);
             var sut = new MarsRovers(direction);
-            sut.Direction.Should().Be(Direction.North);
+            sut.Direction.Letter.Should().Be(directionLetter);
         }
     }
 }
