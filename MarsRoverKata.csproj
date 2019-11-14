@@ -58,6 +58,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Direction.cs" />
+    <Compile Include="Location.cs" />
     <Compile Include="MarsRover.cs" />
     <Compile Include="MarsRoverShould.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

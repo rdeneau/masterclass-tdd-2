@@ -39,5 +39,14 @@ namespace MarsRoverKata
             sut.TurnRight();
             sut.Direction.Letter.Should().Be(endDirection);
         }
+
+        [Theory]
+        [InlineData(1, 1)]
+        public void Have_An_Initial_Location(int x, int y)
+        {
+            var sut = MarsRover.LocatedAt(x, y);
+            sut.Location.X.Should().Be(x);
+            sut.Location.Y.Should().Be(y);
+        }
     }
 }

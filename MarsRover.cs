@@ -8,7 +8,13 @@ namespace MarsRoverKata
             return new MarsRover(direction);
         }
 
+        public static MarsRover LocatedAt(int x, int y)
+        {
+            return HeadingTo("N"); //.WithLocation(x, y);
+        }
+
         public Direction Direction { get; private set; }
+        public Location Location { get; } = new Location(0, 0);
 
         private MarsRover(Direction direction)
         {
