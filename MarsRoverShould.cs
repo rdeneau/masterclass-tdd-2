@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using FluentAssertions;
+using Xunit;
 
 namespace MarsRoverKata
 {
@@ -10,14 +11,7 @@ namespace MarsRoverKata
         {
             var direction = Direction.Create(directionLetter);
             var sut = new MarsRovers(direction);
-        }
-    }
-
-    public class Direction
-    {
-        public static Direction Create(string letter)
-        {
-            return null;
+            sut.Direction.Should().Be(Direction.North);
         }
     }
 }
