@@ -14,7 +14,8 @@ namespace MarsRoverKata
         }
 
         public Direction Direction { get; private set; }
-        public Location Location { get; } = new Location(0, 0);
+
+        public Location Location { get; } = new Location(1, 1);
 
         private MarsRover(Direction direction)
         {
