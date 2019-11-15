@@ -4,7 +4,7 @@ using Xunit;
 
 namespace MarsRoverKata
 {
-    public class CommandHandlerShould
+    public class CommandCollectionShould
     {
         [Theory]
         [InlineData("F")]
@@ -12,11 +12,9 @@ namespace MarsRoverKata
         [InlineData("FRLB")]
         public void Map_Letters_To_Commands(string commandLetters)
         {
-            var sut = new CommandHandler();
+            var sut = CommandCollection.Create(commandLetters);
 
-            var commands = sut.Read(commandLetters);
-
-            var actualLetters = string.Join("", commands.Select(x => x.Letter));
+            var actualLetters = string.Join("", sut.Commands.Select(x => x.Letter));
             actualLetters.Should().Be(commandLetters);
         }
     }
