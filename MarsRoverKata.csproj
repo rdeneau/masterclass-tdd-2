@@ -57,6 +57,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Command.cs" />
+    <Compile Include="CommandHandler.cs" />
+    <Compile Include="CommandHandlerShould.cs" />
     <Compile Include="Coordinate.cs" />
     <Compile Include="CoordinateShould.cs" />
     <Compile Include="Direction.cs" />
