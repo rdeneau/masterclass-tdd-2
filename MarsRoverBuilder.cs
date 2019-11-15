@@ -30,7 +30,6 @@ namespace MarsRoverKata
             return this;
         }
 
-
         public static implicit operator MarsRover(MarsRoverBuilder builder) =>
             new MarsRover(
                 Direction.Create(

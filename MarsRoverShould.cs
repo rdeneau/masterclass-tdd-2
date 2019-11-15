@@ -26,7 +26,7 @@ namespace MarsRoverKata
         public void Turn_Left(string startDirection, string endDirection)
         {
             sut = MarsRover.ThatIs().Facing(startDirection);
-            sut.TurnLeft();
+            sut.RotateLeft();
             sut.Direction.Letter.Should().Be(endDirection);
         }
 
@@ -38,7 +38,7 @@ namespace MarsRoverKata
         public void Turn_Right(string startDirection, string endDirection)
         {
             sut = MarsRover.ThatIs().Facing(startDirection);
-            sut.TurnRight();
+            sut.RotateRight();
             sut.Direction.Letter.Should().Be(endDirection);
         }
 
@@ -48,7 +48,7 @@ namespace MarsRoverKata
         public void Have_An_Initial_Location(int x, int y)
         {
             sut = MarsRover.ThatIs().LocatedAt(x, y);
-            sut.Location.Should().Be(Location.Create(x, y));
+            ShouldBeLocatedAt(x, y);
         }
 
         [Theory]
@@ -64,7 +64,7 @@ namespace MarsRoverKata
 
             sut.MoveForward();
 
-            sut.Location.Should().Be(Location.Create(endX, endY));
+            ShouldBeLocatedAt(endX, endY);
         }
 
         [Theory]
@@ -80,21 +80,19 @@ namespace MarsRoverKata
 
             sut.MoveBackward();
 
-            sut.Location.Should().Be(Location.Create(endX, endY));
+            ShouldBeLocatedAt(endX, endY);
         }
 
-        [Theory(Skip = "TODO now!")]
-        [InlineData(10, 6, "N", 0, 0, 0, 5)]
-        public void Wrap_From_Edge_To_The_Other_Moving_Forward(
-            int gridWidth, int gridHeight, string direction,
-            int startX, int startY,
-            int endX, int endY)
+        [Fact]
+        public void Stay_Still_When_Moving_On_1x1_Grid()
         {
             sut = MarsRover.ThatIs()
-                           .Facing(direction)
-                           .LocatedAt(startX, startY)
-                           .OnGrid(gridWidth, gridHeight);
-            
+                           .LocatedAt(0, 0)
+                           .OnGrid(1, 1);
+
+            sut.MoveForward();
+
+            ShouldBeLocatedAt(0, 0);
         }
 
         [Fact(Skip = "TODO after")]
@@ -107,5 +105,8 @@ namespace MarsRoverKata
 //            var commands = "FLF";
 //            sut.Execute(commands);
         }
+
+        private void ShouldBeLocatedAt(int x, int y) =>
+            sut.Location.Should().Be(Location.Create(x, y));
     }
 }
