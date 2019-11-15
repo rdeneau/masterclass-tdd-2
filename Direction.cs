@@ -11,7 +11,7 @@ namespace MarsRoverKata
                 ? result
                 : None;
 
-        private static readonly Direction None  = new Direction("?", "?", "?", l => {}, l => {});
+        private static readonly Direction None  = new Direction("?", "?", "?", _ => {}, _ => {});
         private static readonly Direction North = new Direction("N", "W", "E", l => l.Y.Decrement(), l => l.Y.Increment());
         private static readonly Direction East  = new Direction("E", "N", "S", l => l.X.Increment(), l => l.X.Decrement());
         private static readonly Direction South = new Direction("S", "E", "W", l => l.Y.Increment(), l => l.Y.Decrement());

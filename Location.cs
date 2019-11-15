@@ -18,8 +18,8 @@ namespace MarsRoverKata
                 Y = y,
             };
 
-        public Coordinate X { get; set; }
-        public Coordinate Y { get; set; }
+        public Coordinate X { get; private set; }
+        public Coordinate Y { get; private set; }
 
         private Location() {}
 
