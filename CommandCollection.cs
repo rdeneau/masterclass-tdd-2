@@ -17,5 +17,13 @@ namespace MarsRoverKata
         {
             Commands = commands.ToList();
         }
+
+        public void Guide(IVehicle vehicle)
+        {
+            foreach (var command in Commands)
+            {
+                command.Move(vehicle);
+            }
+        }
     }
 }

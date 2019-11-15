@@ -5,7 +5,7 @@ namespace MarsRoverKata
     /// • X: West  -> East
     /// • Y: North -> South
     /// </summary>
-    public class MarsRover
+    public class MarsRover : IVehicle
     {
         public static MarsRoverBuilder ThatIs() => new MarsRoverBuilder();
 
