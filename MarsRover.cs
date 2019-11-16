@@ -1,3 +1,5 @@
+using System;
+
 namespace MarsRoverKata
 {
     /// <summary>
@@ -11,7 +13,7 @@ namespace MarsRoverKata
 
         public Direction Direction { get; private set; }
 
-        public Location Location { get; }
+        public Location Location { get; private set; }
 
         public MarsRover(Direction direction, Location location)
         {
@@ -22,11 +24,19 @@ namespace MarsRoverKata
         public void RotateLeft()  => Direction = Direction.Left;
         public void RotateRight() => Direction = Direction.Right;
 
-        public void MoveForward()  => Direction.Forward(Location);
-        public void MoveBackward() => Direction.Backward(Location);
+        public void MoveForward()  => Move(Direction.Forward);
+        public void MoveBackward() => Move(Direction.Backward);
+
+        private void Move(Action<Location> moveLocation)
+        {
+            var nextLocation = Location.Copy();
+            moveLocation(nextLocation);
+            Location = nextLocation;
+        }
 
         public void ReceiveCommands(string commands) =>
-            CommandCollection.Create(commands)
-                             .Guide(this);
+            CommandCollection
+                .Create(commands)
+                .Guide(this);
     }
 }

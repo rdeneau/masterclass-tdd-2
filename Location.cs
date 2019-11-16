@@ -23,6 +23,12 @@ namespace MarsRoverKata
 
         private Location() {}
 
+        public Location Copy() =>
+            Create(X.Value, Y.Value);
+
+        public override string ToString() =>
+            $"{{ X: {X.Value}, Y: {Y.Value} }}";
+
         public bool Equals(Location other)
         {
             if (ReferenceEquals(null, other)) return false;
@@ -44,8 +50,5 @@ namespace MarsRoverKata
                 return (X.GetHashCode() * 397) ^ Y.GetHashCode();
             }
         }
-
-        public override string ToString() =>
-            $"{{ X: {X.Value}, Y: {Y.Value} }}";
     }
 }
