@@ -95,15 +95,22 @@ namespace MarsRoverKata
             ShouldBeLocatedAt(0, 0);
         }
 
-        [Fact(Skip = "TODO after")]
-        public void Execute_Commands()
+        [Theory]
+        [InlineData("S", 1, 1, "FLF", 2, 2)]
+        [InlineData("N", 1, 1, "FLF", 0, 0)]
+        [InlineData("N", 0, 0, "BRFFRF", 2, 2)]
+        public void Be_Guided_By_Received_Commands(
+            string startDirection, int startX, int startY,
+            string commands, int endX, int endY)
         {
             sut = MarsRover.ThatIs()
-                           .Facing("N")
-                           .LocatedAt(1, 1);
+                           .Facing(startDirection)
+                           .LocatedAt(startX, startY)
+                           .OnGrid(10, 10);
 
-//            var commands = "FLF";
-//            sut.Execute(commands);
+            sut.ReceiveCommands(commands);
+
+            ShouldBeLocatedAt(endX, endY);
         }
 
         private void ShouldBeLocatedAt(int x, int y) =>

@@ -10,7 +10,7 @@ namespace MarsRoverKata
                 X = Coordinate.Create(x),
                 Y = Coordinate.Create(y),
             };
-        
+
         public static Location Create(Coordinate x, Coordinate y) =>
             new Location
             {
@@ -44,5 +44,8 @@ namespace MarsRoverKata
                 return (X.GetHashCode() * 397) ^ Y.GetHashCode();
             }
         }
+
+        public override string ToString() =>
+            $"{{ X: {X.Value}, Y: {Y.Value} }}";
     }
 }

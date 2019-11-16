@@ -24,5 +24,9 @@ namespace MarsRoverKata
 
         public void MoveForward()  => Direction.Forward(Location);
         public void MoveBackward() => Direction.Backward(Location);
+
+        public void ReceiveCommands(string commands) =>
+            CommandCollection.Create(commands)
+                             .Guide(this);
     }
 }
