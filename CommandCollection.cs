@@ -8,8 +8,9 @@ namespace MarsRoverKata
         public static CommandCollection Create(string letters) =>
             new CommandCollection(
                 (letters ?? "")
-                    .ToCharArray()
-                    .Select(c => Command.Create($"{c}")));
+                .ToCharArray()
+                .Select(x => Command.Create($"{x}"))
+                .Where(x => x != Command.Unknown));
 
         public IReadOnlyList<Command> Commands { get; }
 

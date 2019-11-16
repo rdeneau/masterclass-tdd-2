@@ -9,9 +9,9 @@ namespace MarsRoverKata
         public static Command Create(string letter) =>
             AllByLetter.TryGetValue(letter, out var result)
                 ? result
-                : None;
+                : Unknown;
 
-        private static readonly Command None     = new Command("?", _ => {});
+        public  static readonly Command Unknown  = new Command("?", _ => { });
         private static readonly Command Left     = new Command("L", x => x.RotateLeft());
         private static readonly Command Right    = new Command("R", x => x.RotateRight());
         private static readonly Command Forward  = new Command("F", x => x.MoveForward());

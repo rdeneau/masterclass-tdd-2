@@ -19,6 +19,15 @@ namespace MarsRoverKata
             actualLetters.Should().Be(commandLetters);
         }
 
+        [Theory]
+        [InlineData("?")]
+        [InlineData("x x")]
+        public void Skip_Unknown_Commands(string commandLetters)
+        {
+            var sut = CommandCollection.Create(commandLetters);
+            sut.Commands.Should().BeEmpty();
+        }
+
         [Fact]
         public void Guide_Vehicle()
         {
