@@ -41,5 +41,16 @@ namespace MarsRoverKata
             vehicleMock.Verify(x => x.RotateLeft(),   Times.Once);
             vehicleMock.Verify(x => x.RotateRight(),  Times.Once);
         }
+
+        [Fact]
+        public void Report_No_Move_Given_Empty_Command()
+        {
+            var sut = CommandCollection.Create("");
+
+            var vehicleMock = new Mock<IVehicle>();
+            var moveEvent = sut.Guide(vehicleMock.Object);
+
+            moveEvent.Should().BeOfType<NoMove>();
+        }
     }
 }
