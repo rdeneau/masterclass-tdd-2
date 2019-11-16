@@ -127,6 +127,20 @@ namespace MarsRoverKata
             ShouldBeLocatedAt(0, 0);
         }
 
+        [Fact]
+        public void Move_To_Next_Location_When_No_Obstacle_Is_Detected()
+        {
+            sut = MarsRover.ThatIs()
+                           .Facing("S")
+                           .LocatedAt(0, 0)
+                           .RegisterObstacleLocatedAt(2, 2);
+
+            var moveEvent = sut.MoveForward();
+            moveEvent.Should().BeOfType<MoveIsPossible>();
+
+            ShouldBeLocatedAt(0, 1);
+        }
+
         private void ShouldBeLocatedAt(int x, int y) =>
             sut.Location.Should().Be(Location.Create(x, y));
     }
