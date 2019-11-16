@@ -15,23 +15,33 @@ namespace MarsRoverKata
 
         public Location Location { get; private set; }
 
-        public MarsRover(Direction direction, Location location)
+        private ObstacleDetector ObstacleDetector { get; }
+
+        public MarsRover(Direction direction, Location location, ObstacleDetector obstacleDetector)
         {
-            Direction = direction;
-            Location  = location;
+            Direction        = direction;
+            Location         = location;
+            ObstacleDetector = obstacleDetector;
         }
 
         public void RotateLeft()  => Direction = Direction.Left;
         public void RotateRight() => Direction = Direction.Right;
 
-        public void MoveForward()  => Move(Direction.Forward);
-        public void MoveBackward() => Move(Direction.Backward);
+        public IMoveEvent MoveForward()  => Move(Direction.Forward);
+        public IMoveEvent MoveBackward() => Move(Direction.Backward);
 
-        private void Move(Action<Location> moveLocation)
+        private IMoveEvent Move(Action<Location> updateLocation)
+        {
+            var nextLocation = NextLocation(updateLocation);
+            var moveEvent    = ObstacleDetector.DetectObstacleLocatedAt(nextLocation);
+            return moveEvent.MoveWhenPossible(() => Location = nextLocation);
+        }
+
+        private Location NextLocation(Action<Location> moveLocation)
         {
             var nextLocation = Location.Copy();
             moveLocation(nextLocation);
-            Location = nextLocation;
+            return nextLocation;
         }
 
         public void ReceiveCommands(string commands) =>

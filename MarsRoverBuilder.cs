@@ -10,6 +10,8 @@ namespace MarsRoverKata
         private int GridWidth { get; set; } = int.MaxValue;
         private int GridHeight { get; set; } = int.MaxValue;
 
+        private readonly ObstacleDetector obstacleDetector = new ObstacleDetector();
+
         public MarsRoverBuilder Facing(string direction)
         {
             DirectionLetter = direction;
@@ -30,12 +32,22 @@ namespace MarsRoverKata
             return this;
         }
 
+        public MarsRoverBuilder RegisterObstacleLocatedAt(int x, int y)
+        {
+            obstacleDetector.RegisterObstacleLocatedAt(x, y);
+            return this;
+        }
+
         public static implicit operator MarsRover(MarsRoverBuilder builder) =>
+            builder.Build();
+
+        private MarsRover Build() =>
             new MarsRover(
                 Direction.Create(
-                    builder.DirectionLetter),
+                    DirectionLetter),
                 Location.Create(
-                    Coordinate.Create(builder.LocationX, builder.GridWidth - 1),
-                    Coordinate.Create(builder.LocationY, builder.GridHeight - 1)));
+                    Coordinate.Create(LocationX, GridWidth - 1),
+                    Coordinate.Create(LocationY, GridHeight - 1)),
+                obstacleDetector);
     }
 }

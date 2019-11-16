@@ -4,7 +4,7 @@ namespace MarsRoverKata
     {
         void RotateLeft();
         void RotateRight();
-        void MoveForward();
-        void MoveBackward();
+        IMoveEvent MoveForward();
+        IMoveEvent MoveBackward();
     }
 }
