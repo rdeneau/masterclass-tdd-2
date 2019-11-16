@@ -11,7 +11,7 @@ namespace MarsRoverKata
                 ? result
                 : Unknown;
 
-        public  static readonly Command Unknown  = new Command("?", _ => { });
+        public  static readonly Command Unknown  = new Command("?", _ => NoMove.Instance);
         private static readonly Command Left     = new Command("L", x => x.RotateLeft());
         private static readonly Command Right    = new Command("R", x => x.RotateRight());
         private static readonly Command Forward  = new Command("F", x => x.MoveForward());
@@ -22,9 +22,9 @@ namespace MarsRoverKata
 
         public string Letter { get; }
 
-        public Action<IVehicle> Move { get; }
+        public Func<IVehicle, IMoveEvent> Move { get; }
 
-        private Command(string letter, Action<IVehicle> move)
+        private Command(string letter, Func<IVehicle, IMoveEvent> move)
         {
             Letter = letter;
             Move   = move;

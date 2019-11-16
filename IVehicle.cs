@@ -2,8 +2,8 @@ namespace MarsRoverKata
 {
     public interface IVehicle
     {
-        void RotateLeft();
-        void RotateRight();
+        IMoveEvent RotateLeft();
+        IMoveEvent RotateRight();
         IMoveEvent MoveForward();
         IMoveEvent MoveBackward();
     }

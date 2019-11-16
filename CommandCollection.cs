@@ -19,12 +19,18 @@ namespace MarsRoverKata
             Commands = commands.ToList();
         }
 
-        public void Guide(IVehicle vehicle)
+        public IMoveEvent Guide(IVehicle vehicle)
         {
+            IMoveEvent moveEvent = NoMove.Instance;
             foreach (var command in Commands)
             {
-                command.Move(vehicle);
+                moveEvent = command.Move(vehicle);
+                if (moveEvent is MoveIsHinderedByAnObstacle)
+                {
+                    break;
+                }
             }
+            return moveEvent;
         }
     }
 }

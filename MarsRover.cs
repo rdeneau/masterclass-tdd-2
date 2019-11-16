@@ -24,8 +24,15 @@ namespace MarsRoverKata
             ObstacleDetector = obstacleDetector;
         }
 
-        public void RotateLeft()  => Direction = Direction.Left;
-        public void RotateRight() => Direction = Direction.Right;
+        public IMoveEvent RotateLeft()  => Rotate(Direction.Left);
+
+        public IMoveEvent RotateRight() => Rotate(Direction.Right);
+
+        private IMoveEvent Rotate(Direction direction)
+        {
+            Direction = direction;
+            return new MoveIsPossible(Location);
+        }
 
         public IMoveEvent MoveForward()  => Move(Direction.Forward);
         public IMoveEvent MoveBackward() => Move(Direction.Backward);
@@ -44,7 +51,7 @@ namespace MarsRoverKata
             return nextLocation;
         }
 
-        public void ReceiveCommands(string commands) =>
+        public IMoveEvent ReceiveCommands(string commands) =>
             CommandCollection
                 .Create(commands)
                 .Guide(this);

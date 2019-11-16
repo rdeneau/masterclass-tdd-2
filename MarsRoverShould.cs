@@ -96,12 +96,12 @@ namespace MarsRoverKata
         }
 
         [Theory]
-        [InlineData("S", 1, 1, "FLF", 2, 2)]
-        [InlineData("N", 1, 1, "FLF", 0, 0)]
+        [InlineData("S", 1, 1, "FLF",    2, 2)]
+        [InlineData("N", 1, 1, "FLF",    0, 0)]
         [InlineData("N", 0, 0, "BRFFRF", 2, 2)]
         public void Be_Guided_By_Received_Commands(
             string startDirection, int startX, int startY,
-            string commands, int endX, int endY)
+            string commands,       int endX,   int endY)
         {
             sut = MarsRover.ThatIs()
                            .Facing(startDirection)
@@ -139,6 +139,22 @@ namespace MarsRoverKata
             moveEvent.Should().BeOfType<MoveIsPossible>();
 
             ShouldBeLocatedAt(0, 1);
+        }
+
+        [Theory]
+        [InlineData(0, 1)]
+        [InlineData(2, 2)]
+        public void Be_Guided_Until_Blocked_By_An_Obstacle_At(int x, int y)
+        {
+            sut = MarsRover.ThatIs()
+                           .Facing("N")
+                           .LocatedAt(0, 0)
+                           .RegisterObstacleLocatedAt(x, y);
+
+            var lastMoveEvent = sut.ReceiveCommands("BRFFRF");
+
+            lastMoveEvent.Should().BeOfType<MoveIsHinderedByAnObstacle>()
+                         .Which.Obstacle.Should().Be(Location.Create(x, y));
         }
 
         private void ShouldBeLocatedAt(int x, int y) =>
