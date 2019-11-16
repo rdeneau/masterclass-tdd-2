@@ -11,7 +11,7 @@ namespace MarsRoverKata
             _obstacles.Add(Location.Create(x, y));
         }
 
-        public IMoveEvent DetectObstacleLocatedAt(Location nextLocation)
+        public IMoveEvaluation EvaluateMoveTo(Location nextLocation)
         {
             if (_obstacles.Contains(nextLocation))
                 return new MoveIsHinderedByAnObstacle(nextLocation);

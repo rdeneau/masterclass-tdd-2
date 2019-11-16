@@ -2,7 +2,7 @@ using System;
 
 namespace MarsRoverKata
 {
-    public class MoveIsHinderedByAnObstacle : IMoveEvent
+    public class MoveIsHinderedByAnObstacle : IMoveEvaluation
     {
         public Location Obstacle { get; }
 
@@ -11,7 +11,7 @@ namespace MarsRoverKata
             Obstacle = obstacle.Copy();
         }
 
-        public IMoveEvent MoveWhenPossible(Action move)
+        public IMoveEvent WhenPossible(Action move)
         {
             return this;
         }

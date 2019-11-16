@@ -79,6 +79,7 @@
     <Compile Include="Coordinate.cs" />
     <Compile Include="CoordinateShould.cs" />
     <Compile Include="Direction.cs" />
+    <Compile Include="IMoveEvaluation.cs" />
     <Compile Include="IMoveEvent.cs" />
     <Compile Include="IVehicle.cs" />
     <Compile Include="Location.cs" />

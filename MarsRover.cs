@@ -32,9 +32,9 @@ namespace MarsRoverKata
 
         private IMoveEvent Move(Action<Location> updateLocation)
         {
-            var nextLocation = NextLocation(updateLocation);
-            var moveEvent    = ObstacleDetector.DetectObstacleLocatedAt(nextLocation);
-            return moveEvent.MoveWhenPossible(() => Location = nextLocation);
+            var nextLocation   = NextLocation(updateLocation);
+            var moveEvaluation = ObstacleDetector.EvaluateMoveTo(nextLocation);
+            return moveEvaluation.WhenPossible(() => Location = nextLocation);
         }
 
         private Location NextLocation(Action<Location> moveLocation)
