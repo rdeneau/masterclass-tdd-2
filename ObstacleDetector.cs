@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using MarsRoverKata.Events;
 
 namespace MarsRoverKata
 {
@@ -11,12 +12,18 @@ namespace MarsRoverKata
             _obstacles.Add(Location.Create(x, y));
         }
 
-        public IMoveEvaluation EvaluateMoveTo(Location nextLocation)
+        public IVehicleEvent TryMoveVehicleTo(IMovable vehicle, Location nextLocation)
         {
-            if (_obstacles.Contains(nextLocation))
-                return new MoveIsBlockedByAnObstacle(nextLocation);
-            else
-                return new MoveIsPossible(nextLocation);
+            if (HasObstacleAt(nextLocation))
+            {
+                return new MoveBlockedEvent(nextLocation);
+            }
+
+            vehicle.MoveTo(nextLocation);
+            return new MoveEvent();
         }
+
+        private bool HasObstacleAt(Location nextLocation) =>
+            _obstacles.Contains(nextLocation);
     }
 }

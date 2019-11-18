@@ -1,5 +1,6 @@
 using System.Linq;
 using FluentAssertions;
+using MarsRoverKata.Events;
 using Moq;
 using Xunit;
 
@@ -50,7 +51,7 @@ namespace MarsRoverKata
             var vehicleMock = new Mock<IVehicle>();
             var moveEvent = sut.Guide(vehicleMock.Object);
 
-            moveEvent.Should().BeOfType<NoMove>();
+            moveEvent.Should().BeOfType<NullEvent>();
         }
     }
 }

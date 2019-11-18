@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using MarsRoverKata.Events;
 using Xunit;
 
 namespace MarsRoverKata
@@ -122,7 +123,7 @@ namespace MarsRoverKata
                            .RegisterObstacleLocatedAt(0, 1);
 
             var moveEvent = sut.MoveForward();
-            moveEvent.Should().BeOfType<MoveIsBlockedByAnObstacle>();
+            moveEvent.Should().BeOfType<MoveBlockedEvent>();
 
             ShouldBeLocatedAt(0, 0);
         }
@@ -136,7 +137,7 @@ namespace MarsRoverKata
                            .RegisterObstacleLocatedAt(2, 2);
 
             var moveEvent = sut.MoveForward();
-            moveEvent.Should().BeOfType<MoveIsPossible>();
+            moveEvent.Should().BeOfType<MoveEvent>();
 
             ShouldBeLocatedAt(0, 1);
         }
@@ -153,7 +154,7 @@ namespace MarsRoverKata
 
             var lastMoveEvent = sut.ReceiveCommands("BRFFRF");
 
-            lastMoveEvent.Should().BeOfType<MoveIsBlockedByAnObstacle>()
+            lastMoveEvent.Should().BeOfType<MoveBlockedEvent>()
                          .Which.Obstacle.Should().Be(Location.Create(x, y));
         }
 

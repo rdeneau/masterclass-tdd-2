@@ -79,16 +79,17 @@
     <Compile Include="Coordinate.cs" />
     <Compile Include="CoordinateShould.cs" />
     <Compile Include="Direction.cs" />
-    <Compile Include="IMoveEvaluation.cs" />
-    <Compile Include="IMoveEvent.cs" />
+    <Compile Include="Events\IVehicleEvent.cs" />
+    <Compile Include="Events\MoveBlockedEvent.cs" />
+    <Compile Include="Events\MoveEvent.cs" />
+    <Compile Include="Events\NullEvent.cs" />
+    <Compile Include="Events\RotateEvent.cs" />
+    <Compile Include="IMovable.cs" />
     <Compile Include="IVehicle.cs" />
     <Compile Include="Location.cs" />
     <Compile Include="MarsRover.cs" />
     <Compile Include="MarsRoverBuilder.cs" />
     <Compile Include="MarsRoverShould.cs" />
-    <Compile Include="MoveIsPossible.cs" />
-    <Compile Include="MoveIsBlockedByAnObstacle.cs" />
-    <Compile Include="NoMove.cs" />
     <Compile Include="ObstacleDetector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

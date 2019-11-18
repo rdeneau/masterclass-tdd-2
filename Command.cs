@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MarsRoverKata.Events;
 
 namespace MarsRoverKata
 {
@@ -11,7 +12,7 @@ namespace MarsRoverKata
                 ? result
                 : Unknown;
 
-        public  static readonly Command Unknown  = new Command("?", _ => NoMove.Instance);
+        public  static readonly Command Unknown  = new Command("?", _ => NullEvent.Instance);
         private static readonly Command Left     = new Command("L", x => x.RotateLeft());
         private static readonly Command Right    = new Command("R", x => x.RotateRight());
         private static readonly Command Forward  = new Command("F", x => x.MoveForward());
@@ -22,9 +23,9 @@ namespace MarsRoverKata
 
         public string Letter { get; }
 
-        public Func<IVehicle, IMoveEvent> Move { get; }
+        public Func<IVehicle, IVehicleEvent> Move { get; }
 
-        private Command(string letter, Func<IVehicle, IMoveEvent> move)
+        private Command(string letter, Func<IVehicle, IVehicleEvent> move)
         {
             Letter = letter;
             Move   = move;

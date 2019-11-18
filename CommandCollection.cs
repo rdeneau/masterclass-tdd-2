@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using MarsRoverKata.Events;
 
 namespace MarsRoverKata
 {
@@ -19,20 +20,20 @@ namespace MarsRoverKata
             Commands = commands.ToList();
         }
 
-        public IMoveEvent Guide(IVehicle vehicle) =>
+        public IVehicleEvent Guide(IVehicle vehicle) =>
             PrepareMoves(vehicle)
                 .Where(IsMoveBlockedOrLast)
-                .DefaultIfEmpty(NoMove.Instance)
+                .DefaultIfEmpty(NullEvent.Instance)
                 .First();
 
-        private IEnumerable<IMoveEvent> PrepareMoves(IVehicle vehicle) =>
+        private IEnumerable<IVehicleEvent> PrepareMoves(IVehicle vehicle) =>
             Commands.Select(command => command.Move(vehicle));
 
-        private bool IsMoveBlockedOrLast(IMoveEvent moveEvent, int index)
+        private bool IsMoveBlockedOrLast(IVehicleEvent moveEvent, int index)
         {
-            var isLast = index == Commands.Count - 1;
-            var isStop = moveEvent?.IsMoveBlocked ?? false;
-            return isStop || isLast;
+            var blocked = moveEvent is MoveBlockedEvent;
+            var isLast  = index == Commands.Count - 1;
+            return blocked || isLast;
         }
     }
 }

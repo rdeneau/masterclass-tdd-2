@@ -1,4 +1,5 @@
 using System;
+using MarsRoverKata.Events;
 
 namespace MarsRoverKata
 {
@@ -7,7 +8,7 @@ namespace MarsRoverKata
     /// • X: West  -> East
     /// • Y: North -> South
     /// </summary>
-    public class MarsRover : IVehicle
+    public class MarsRover : IVehicle, IMovable
     {
         public static MarsRoverBuilder ThatIs() => new MarsRoverBuilder();
 
@@ -24,33 +25,37 @@ namespace MarsRoverKata
             ObstacleDetector = obstacleDetector;
         }
 
-        public IMoveEvent RotateLeft()  => Rotate(Direction.Left);
-        public IMoveEvent RotateRight() => Rotate(Direction.Right);
+        public IVehicleEvent RotateLeft()  => Rotate(Direction.Left);
+        public IVehicleEvent RotateRight() => Rotate(Direction.Right);
 
-        private IMoveEvent Rotate(Direction direction)
+        private IVehicleEvent Rotate(Direction direction)
         {
             Direction = direction;
-            return new MoveIsPossible(Location);
+            return new RotateEvent();
         }
 
-        public IMoveEvent MoveForward()  => Move(Direction.Forward);
-        public IMoveEvent MoveBackward() => Move(Direction.Backward);
+        public IVehicleEvent MoveForward()  => TryMove(Direction.Forward);
+        public IVehicleEvent MoveBackward() => TryMove(Direction.Backward);
 
-        private IMoveEvent Move(Action<Location> updateLocation)
+        private IVehicleEvent TryMove(Action<Location> move)
         {
-            var nextLocation   = NextLocation(updateLocation);
-            var moveEvaluation = ObstacleDetector.EvaluateMoveTo(nextLocation);
-            return moveEvaluation.WhenPossible(() => Location = nextLocation);
+            var nextLocation = LocationAfter(move);
+            return ObstacleDetector.TryMoveVehicleTo(this, nextLocation);
         }
 
-        private Location NextLocation(Action<Location> moveLocation)
+        private Location LocationAfter(Action<Location> move)
         {
             var nextLocation = Location.Copy();
-            moveLocation(nextLocation);
+            move(nextLocation);
             return nextLocation;
         }
 
-        public IMoveEvent ReceiveCommands(string commands) =>
+        void IMovable.MoveTo(Location nextLocation)
+        {
+            Location = nextLocation;
+        }
+
+        public IVehicleEvent ReceiveCommands(string commands) =>
             CommandCollection
                 .Create(commands)
                 .Guide(this);
