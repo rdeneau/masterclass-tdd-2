@@ -4,6 +4,8 @@ namespace MarsRoverKata
     {
         public static readonly NoMove Instance = new NoMove();
 
+        public bool IsMoveBlocked => false;
+
         private NoMove() {}
     }
 }

@@ -19,18 +19,15 @@ namespace MarsRoverKata
             Commands = commands.ToList();
         }
 
-        public IMoveEvent Guide(IVehicle vehicle)
-        {
-            IMoveEvent moveEvent = NoMove.Instance;
-            foreach (var command in Commands)
-            {
-                moveEvent = command.Move(vehicle);
-                if (moveEvent is MoveIsHinderedByAnObstacle)
-                {
-                    break;
-                }
-            }
-            return moveEvent;
-        }
+        public IMoveEvent Guide(IVehicle vehicle) =>
+            Commands.Select(command => command.Move(vehicle))
+                    .Where((moveEvent, index) =>
+                    {
+                        var isLast = index == Commands.Count - 1;
+                        var isStop = moveEvent?.IsMoveBlocked ?? false;
+                        return isStop || isLast;
+                    })
+                    .DefaultIfEmpty(NoMove.Instance)
+                    .First();
     }
 }

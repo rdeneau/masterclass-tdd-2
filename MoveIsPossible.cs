@@ -4,6 +4,8 @@ namespace MarsRoverKata
 {
     public class MoveIsPossible : IMoveEvaluation
     {
+        public bool IsMoveBlocked => false;
+
         public Location NextLocation { get; }
 
         public MoveIsPossible(Location to)

@@ -122,7 +122,7 @@ namespace MarsRoverKata
                            .RegisterObstacleLocatedAt(0, 1);
 
             var moveEvent = sut.MoveForward();
-            moveEvent.Should().BeOfType<MoveIsHinderedByAnObstacle>();
+            moveEvent.Should().BeOfType<MoveIsBlockedByAnObstacle>();
 
             ShouldBeLocatedAt(0, 0);
         }
@@ -153,7 +153,7 @@ namespace MarsRoverKata
 
             var lastMoveEvent = sut.ReceiveCommands("BRFFRF");
 
-            lastMoveEvent.Should().BeOfType<MoveIsHinderedByAnObstacle>()
+            lastMoveEvent.Should().BeOfType<MoveIsBlockedByAnObstacle>()
                          .Which.Obstacle.Should().Be(Location.Create(x, y));
         }
 

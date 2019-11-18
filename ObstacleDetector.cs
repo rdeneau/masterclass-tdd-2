@@ -14,7 +14,7 @@ namespace MarsRoverKata
         public IMoveEvaluation EvaluateMoveTo(Location nextLocation)
         {
             if (_obstacles.Contains(nextLocation))
-                return new MoveIsHinderedByAnObstacle(nextLocation);
+                return new MoveIsBlockedByAnObstacle(nextLocation);
             else
                 return new MoveIsPossible(nextLocation);
         }

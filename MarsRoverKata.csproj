@@ -87,7 +87,7 @@
     <Compile Include="MarsRoverBuilder.cs" />
     <Compile Include="MarsRoverShould.cs" />
     <Compile Include="MoveIsPossible.cs" />
-    <Compile Include="MoveIsHinderedByAnObstacle.cs" />
+    <Compile Include="MoveIsBlockedByAnObstacle.cs" />
     <Compile Include="NoMove.cs" />
     <Compile Include="ObstacleDetector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

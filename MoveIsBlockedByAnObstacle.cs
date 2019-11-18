@@ -2,11 +2,13 @@ using System;
 
 namespace MarsRoverKata
 {
-    public class MoveIsHinderedByAnObstacle : IMoveEvaluation
+    public class MoveIsBlockedByAnObstacle : IMoveEvaluation
     {
+        public bool IsMoveBlocked => true;
+
         public Location Obstacle { get; }
 
-        public MoveIsHinderedByAnObstacle(Location obstacle)
+        public MoveIsBlockedByAnObstacle(Location obstacle)
         {
             Obstacle = obstacle.Copy();
         }
