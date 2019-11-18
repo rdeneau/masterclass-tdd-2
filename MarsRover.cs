@@ -25,7 +25,6 @@ namespace MarsRoverKata
         }
 
         public IMoveEvent RotateLeft()  => Rotate(Direction.Left);
-
         public IMoveEvent RotateRight() => Rotate(Direction.Right);
 
         private IMoveEvent Rotate(Direction direction)

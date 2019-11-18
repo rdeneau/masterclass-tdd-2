@@ -20,14 +20,19 @@ namespace MarsRoverKata
         }
 
         public IMoveEvent Guide(IVehicle vehicle) =>
-            Commands.Select(command => command.Move(vehicle))
-                    .Where((moveEvent, index) =>
-                    {
-                        var isLast = index == Commands.Count - 1;
-                        var isStop = moveEvent?.IsMoveBlocked ?? false;
-                        return isStop || isLast;
-                    })
-                    .DefaultIfEmpty(NoMove.Instance)
-                    .First();
+            PrepareMoves(vehicle)
+                .Where(IsMoveBlockedOrLast)
+                .DefaultIfEmpty(NoMove.Instance)
+                .First();
+
+        private IEnumerable<IMoveEvent> PrepareMoves(IVehicle vehicle) =>
+            Commands.Select(command => command.Move(vehicle));
+
+        private bool IsMoveBlockedOrLast(IMoveEvent moveEvent, int index)
+        {
+            var isLast = index == Commands.Count - 1;
+            var isStop = moveEvent?.IsMoveBlocked ?? false;
+            return isStop || isLast;
+        }
     }
 }
