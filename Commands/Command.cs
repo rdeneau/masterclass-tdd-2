@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MarsRoverKata.Events;
 
-namespace MarsRoverKata
+namespace MarsRoverKata.Commands
 {
     public class Command
     {

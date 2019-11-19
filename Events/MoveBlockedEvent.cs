@@ -1,3 +1,5 @@
+using MarsRoverKata.Positioning;
+
 namespace MarsRoverKata.Events
 {
     public class MoveBlockedEvent : IVehicleEvent

@@ -73,24 +73,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Command.cs" />
-    <Compile Include="CommandCollection.cs" />
-    <Compile Include="CommandCollectionShould.cs" />
-    <Compile Include="Coordinate.cs" />
-    <Compile Include="CoordinateShould.cs" />
-    <Compile Include="Direction.cs" />
+    <Compile Include="Commands\Command.cs" />
+    <Compile Include="Commands\CommandCollection.cs" />
+    <Compile Include="Commands\CommandCollectionShould.cs" />
+    <Compile Include="Commands\IVehicle.cs" />
     <Compile Include="Events\IVehicleEvent.cs" />
     <Compile Include="Events\MoveBlockedEvent.cs" />
     <Compile Include="Events\MoveEvent.cs" />
     <Compile Include="Events\NullEvent.cs" />
     <Compile Include="Events\RotateEvent.cs" />
-    <Compile Include="IMovable.cs" />
-    <Compile Include="IVehicle.cs" />
-    <Compile Include="Location.cs" />
+    <Compile Include="Externals\ObstacleDetector.cs" />
+    <Compile Include="IObstacleDetector.cs" />
     <Compile Include="MarsRover.cs" />
     <Compile Include="MarsRoverBuilder.cs" />
     <Compile Include="MarsRoverShould.cs" />
-    <Compile Include="ObstacleDetector.cs" />
+    <Compile Include="Positioning\Coordinate.cs" />
+    <Compile Include="Positioning\CoordinateShould.cs" />
+    <Compile Include="Positioning\Direction.cs" />
+    <Compile Include="Positioning\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

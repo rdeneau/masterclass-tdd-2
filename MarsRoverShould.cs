@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using MarsRoverKata.Events;
+using MarsRoverKata.Positioning;
 using Xunit;
 
 namespace MarsRoverKata

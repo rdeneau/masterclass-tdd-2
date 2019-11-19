@@ -1,6 +1,6 @@
 using System;
 
-namespace MarsRoverKata
+namespace MarsRoverKata.Positioning
 {
     public class Coordinate : IEquatable<Coordinate>
     {

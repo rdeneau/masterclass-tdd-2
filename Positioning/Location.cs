@@ -1,6 +1,6 @@
 using System;
 
-namespace MarsRoverKata
+namespace MarsRoverKata.Positioning
 {
     public sealed class Location : IEquatable<Location>
     {

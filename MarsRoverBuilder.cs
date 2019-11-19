@@ -1,3 +1,6 @@
+using MarsRoverKata.Externals;
+using MarsRoverKata.Positioning;
+
 namespace MarsRoverKata
 {
     public class MarsRoverBuilder

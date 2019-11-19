@@ -1,6 +1,6 @@
 using MarsRoverKata.Events;
 
-namespace MarsRoverKata
+namespace MarsRoverKata.Commands
 {
     public interface IVehicle
     {

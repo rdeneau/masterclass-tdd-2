@@ -1,5 +1,7 @@
 using System;
+using MarsRoverKata.Commands;
 using MarsRoverKata.Events;
+using MarsRoverKata.Positioning;
 
 namespace MarsRoverKata
 {
@@ -8,7 +10,7 @@ namespace MarsRoverKata
     /// • X: West  -> East
     /// • Y: North -> South
     /// </summary>
-    public class MarsRover : IVehicle, IMovable
+    public class MarsRover : IVehicle
     {
         public static MarsRoverBuilder ThatIs() => new MarsRoverBuilder();
 
@@ -16,9 +18,9 @@ namespace MarsRoverKata
 
         public Location Location { get; private set; }
 
-        private ObstacleDetector ObstacleDetector { get; }
+        private IObstacleDetector ObstacleDetector { get; }
 
-        public MarsRover(Direction direction, Location location, ObstacleDetector obstacleDetector)
+        public MarsRover(Direction direction, Location location, IObstacleDetector obstacleDetector)
         {
             Direction        = direction;
             Location         = location;
@@ -40,7 +42,13 @@ namespace MarsRoverKata
         private IVehicleEvent TryMove(Action<Location> move)
         {
             var nextLocation = LocationAfter(move);
-            return ObstacleDetector.TryMoveVehicleTo(this, nextLocation);
+            if (ObstacleDetector.HasObstacleAt(nextLocation))
+            {
+                return new MoveBlockedEvent(nextLocation);
+            }
+
+            Location = nextLocation;
+            return new MoveEvent();
         }
 
         private Location LocationAfter(Action<Location> move)
@@ -48,11 +56,6 @@ namespace MarsRoverKata
             var nextLocation = Location.Copy();
             move(nextLocation);
             return nextLocation;
-        }
-
-        void IMovable.MoveTo(Location nextLocation)
-        {
-            Location = nextLocation;
         }
 
         public IVehicleEvent ReceiveCommands(string commands) =>

@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Xunit;
 
-namespace MarsRoverKata
+namespace MarsRoverKata.Positioning
 {
     public class CoordinateShould
     {

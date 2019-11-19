@@ -4,7 +4,7 @@ using MarsRoverKata.Events;
 using Moq;
 using Xunit;
 
-namespace MarsRoverKata
+namespace MarsRoverKata.Commands
 {
     public class CommandCollectionShould
     {

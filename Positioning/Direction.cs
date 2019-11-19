@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MarsRoverKata
+namespace MarsRoverKata.Positioning
 {
     public sealed class Direction
     {
