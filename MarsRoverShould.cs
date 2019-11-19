@@ -90,7 +90,7 @@ namespace MarsRoverKata
         {
             sut = MarsRover.ThatIs()
                            .LocatedAt(0, 0)
-                           .OnGrid(1, 1);
+                           .OnGridOfSize(1, 1);
 
             sut.MoveForward();
 
@@ -108,7 +108,7 @@ namespace MarsRoverKata
             sut = MarsRover.ThatIs()
                            .Facing(startDirection)
                            .LocatedAt(startX, startY)
-                           .OnGrid(10, 10);
+                           .OnGridOfSize(10, 10);
 
             sut.ReceiveCommands(commands);
 
@@ -121,7 +121,7 @@ namespace MarsRoverKata
             sut = MarsRover.ThatIs()
                            .Facing("S")
                            .LocatedAt(0, 0)
-                           .RegisterObstacleLocatedAt(0, 1);
+                           .WithObstacleAt(0, 1);
 
             var moveEvent = sut.MoveForward();
             moveEvent.Should().BeOfType<MoveBlockedEvent>();
@@ -135,7 +135,7 @@ namespace MarsRoverKata
             sut = MarsRover.ThatIs()
                            .Facing("S")
                            .LocatedAt(0, 0)
-                           .RegisterObstacleLocatedAt(2, 2);
+                           .WithObstacleAt(2, 2);
 
             var moveEvent = sut.MoveForward();
             moveEvent.Should().BeOfType<MoveEvent>();
@@ -151,7 +151,7 @@ namespace MarsRoverKata
             sut = MarsRover.ThatIs()
                            .Facing("N")
                            .LocatedAt(0, 0)
-                           .RegisterObstacleLocatedAt(x, y);
+                           .WithObstacleAt(x, y);
 
             var lastMoveEvent = sut.ReceiveCommands("BRFFRF");
 

@@ -82,7 +82,7 @@
     <Compile Include="Events\MoveEvent.cs" />
     <Compile Include="Events\NullEvent.cs" />
     <Compile Include="Events\RotateEvent.cs" />
-    <Compile Include="Externals\ObstacleDetector.cs" />
+    <Compile Include="Externals\ObstacleRegistry.cs" />
     <Compile Include="IObstacleDetector.cs" />
     <Compile Include="MarsRover.cs" />
     <Compile Include="MarsRoverBuilder.cs" />

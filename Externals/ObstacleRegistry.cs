@@ -3,7 +3,7 @@ using MarsRoverKata.Positioning;
 
 namespace MarsRoverKata.Externals
 {
-    public class ObstacleDetector : IObstacleDetector
+    public class ObstacleRegistry : IObstacleDetector
     {
         private readonly List<Location> _obstacles = new List<Location>();
 
