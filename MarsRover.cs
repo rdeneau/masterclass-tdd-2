@@ -18,13 +18,13 @@ namespace MarsRoverKata
 
         public Location Location { get; private set; }
 
-        private IObstacleDetector ObstacleDetector { get; }
+        private IObstacleDetector Detector { get; }
 
-        public MarsRover(Direction direction, Location location, IObstacleDetector obstacleDetector)
+        public MarsRover(Direction direction, Location location, IObstacleDetector detector)
         {
-            Direction        = direction;
-            Location         = location;
-            ObstacleDetector = obstacleDetector;
+            Direction = direction;
+            Location  = location;
+            Detector  = detector;
         }
 
         public IVehicleEvent RotateLeft()  => Rotate(Direction.Left);
@@ -42,11 +42,18 @@ namespace MarsRoverKata
         private IVehicleEvent TryMove(Action<Location> move)
         {
             var nextLocation = LocationAfter(move);
-            if (ObstacleDetector.HasObstacleAt(nextLocation))
-            {
-                return new MoveBlockedEvent(nextLocation);
-            }
+            return Detector.DetectObstacleAt(nextLocation)
+                       ? MoveBlockedAt(nextLocation)
+                       : MoveTo(nextLocation);
+        }
 
+        private static IVehicleEvent MoveBlockedAt(Location nextLocation)
+        {
+            return new MoveBlockedEvent(nextLocation);
+        }
+
+        private IVehicleEvent MoveTo(Location nextLocation)
+        {
             Location = nextLocation;
             return new MoveEvent();
         }

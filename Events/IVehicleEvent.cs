@@ -1,6 +1,7 @@
 namespace MarsRoverKata.Events
 {
-    public interface IVehicleEvent
-    {
-    }
+    /// <summary>
+    /// Marker interface to emulate union type
+    /// </summary>
+    public interface IVehicleEvent { }
 }

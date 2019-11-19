@@ -4,6 +4,6 @@ namespace MarsRoverKata
 {
     public interface IObstacleDetector
     {
-        bool HasObstacleAt(Location nextLocation);
+        bool DetectObstacleAt(Location nextLocation);
     }
 }

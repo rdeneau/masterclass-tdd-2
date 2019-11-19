@@ -12,7 +12,7 @@ namespace MarsRoverKata.Externals
             _obstacles.Add(Location.Create(x, y));
         }
 
-        public bool HasObstacleAt(Location nextLocation) =>
+        public bool DetectObstacleAt(Location nextLocation) =>
             _obstacles.Contains(nextLocation);
     }
 }
