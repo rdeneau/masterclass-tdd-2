@@ -25,7 +25,7 @@ namespace MarsRoverKata
         [InlineData("W", "S")]
         [InlineData("S", "E")]
         [InlineData("E", "N")]
-        public void Turn_Left(string startDirection, string endDirection)
+        public void Rotate_Left(string startDirection, string endDirection)
         {
             sut = MarsRover.ThatIs().Facing(startDirection);
             sut.RotateLeft();
@@ -37,7 +37,7 @@ namespace MarsRoverKata
         [InlineData("S", "W")]
         [InlineData("E", "S")]
         [InlineData("N", "E")]
-        public void Turn_Right(string startDirection, string endDirection)
+        public void Rotate_Right(string startDirection, string endDirection)
         {
             sut = MarsRover.ThatIs().Facing(startDirection);
             sut.RotateRight();
