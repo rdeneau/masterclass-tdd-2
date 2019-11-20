@@ -1,3 +1,4 @@
+using System;
 using MarsRoverKata.Externals;
 using MarsRoverKata.Positioning;
 
@@ -15,31 +16,25 @@ namespace MarsRoverKata
 
         private readonly ObstacleRegistry obstacleRegistry = new ObstacleRegistry();
 
-        public MarsRoverBuilder Facing(string direction)
-        {
-            DirectionLetter = direction;
-            return this;
-        }
+        public MarsRoverBuilder Facing(string direction) =>
+            With(() => DirectionLetter = direction);
 
-        public MarsRoverBuilder LocatedAt(int x, int y)
-        {
-            LocationX = x;
-            LocationY = y;
-            return this;
-        }
+        public MarsRoverBuilder LocatedAt(int x, int y) =>
+            With(() =>
+            {
+                LocationX = x;
+                LocationY = y;
+            });
 
-        public MarsRoverBuilder OnGridOfSize(int width, int height)
-        {
-            GridWidth  = width;
-            GridHeight = height;
-            return this;
-        }
+        public MarsRoverBuilder OnGridOfSize(int width, int height) =>
+            With(() =>
+            {
+                GridWidth  = width;
+                GridHeight = height;
+            });
 
-        public MarsRoverBuilder WithObstacleAt(int x, int y)
-        {
-            obstacleRegistry.RegisterObstacleLocatedAt(x, y);
-            return this;
-        }
+        public MarsRoverBuilder WithObstacleAt(int x, int y) =>
+            With(() => obstacleRegistry.RegisterObstacleLocatedAt(x, y));
 
         public static implicit operator MarsRover(MarsRoverBuilder builder) =>
             builder.Build();
@@ -52,5 +47,11 @@ namespace MarsRoverKata
                     Coordinate.Create(LocationX, GridWidth - 1),
                     Coordinate.Create(LocationY, GridHeight - 1)),
                 obstacleRegistry);
+
+        private MarsRoverBuilder With(Action action)
+        {
+            action();
+            return this;
+        }
     }
 }
